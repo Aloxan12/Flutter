@@ -57,7 +57,7 @@ class _MyFirstAppState extends State<MyFirstApp> {
                     children: <Widget>[
                       LinearProgressIndicator(value: _progressValue),
                       Text(
-                        '${(_progressValue * 100).toStringAsFixed(1)}%',
+                        '${(_progressValue * 100).round()}%',
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ],
