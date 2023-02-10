@@ -17,9 +17,19 @@ class CounterAppState extends State<CounterApp> {
   double _count = 50;
 
   @override
-  void incrementCount() {}
+  void incrementCount() {
+    setState(() {
+      _count += 1;
+    });
+  }
 
-  void decrementCount() {}
+  void decrementCount() {
+    if(_count > 0){
+      setState(() {
+        _count -= 1;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +74,7 @@ class CounterAppState extends State<CounterApp> {
                             padding: const EdgeInsets.all(12.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
-                          onPressed: () {},
+                          onPressed: decrementCount,
                           child: const Text('-'),
                         ),
                         Container(
@@ -81,7 +91,7 @@ class CounterAppState extends State<CounterApp> {
                             padding: const EdgeInsets.all(12.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
-                          onPressed: () {},
+                          onPressed: incrementCount,
                           child: const Text('+'),
                         ),
                       ],
