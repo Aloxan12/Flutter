@@ -1,10 +1,33 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyFirstApp());
+  runApp(AssetImageApp());
+}
+
+class AssetImageApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Add assets'),
+          ),
+          body: Center(
+            child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Image(
+                  image: AssetImage('assets/images/bg.png'),
+                ),
+                Image.asset('assets/icons/done.png'),
+              ],
+            ),
+          ),
+        ),
+    );
+  }
 }
 
 class MyFirstApp extends StatefulWidget {
@@ -24,12 +47,13 @@ class _MyFirstAppState extends State<MyFirstApp> {
     // _progressValue = 0.0;
     super.initState();
   }
-  void _updateProgress(){
+
+  void _updateProgress() {
     const oneSec = const Duration(seconds: 1);
-    Timer.periodic(oneSec, (Timer t){
+    Timer.periodic(oneSec, (Timer t) {
       setState(() {
         _progressValue += 0.2;
-        if(_progressValue >= 1.0){
+        if (_progressValue >= 1.0) {
           _loading = false;
           t.cancel();
           _progressValue = 0.0;
@@ -53,23 +77,23 @@ class _MyFirstAppState extends State<MyFirstApp> {
             padding: EdgeInsets.all(16),
             child: _loading
                 ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      LinearProgressIndicator(value: _progressValue),
-                      Text(
-                        '${(_progressValue * 100).round()}%',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ],
-                  )
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                LinearProgressIndicator(value: _progressValue),
+                Text(
+                  '${(_progressValue * 100).round()}%',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ],
+            )
                 : Text(
-                    'Press button to download',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
+              'Press button to download',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: (){
+          onPressed: () {
             setState(() {
               _loading = !_loading;
               _updateProgress();
