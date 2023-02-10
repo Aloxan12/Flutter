@@ -10,22 +10,35 @@ class AssetImageApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Add assets'),
-          ),
-          body: Center(
-            child: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                Image(
-                  image: AssetImage('assets/images/bg.png'),
+      theme: ThemeData(fontFamily: 'IndieFlower'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Add assets'),
+        ),
+        body: Center(
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Image(
+                image: AssetImage('assets/images/bg.png'),
+              ),
+              Image.asset('assets/icons/done.png'),
+              Positioned(
+                top: 36,
+                left: 90,
+                child: Text(
+                  'My custom font',
+                  style: TextStyle(
+                      fontSize: 30,
+                      // fontFamily: 'IndieFlower',
+                      color: Colors.white
+                  ),
                 ),
-                Image.asset('assets/icons/done.png'),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 }
@@ -77,19 +90,19 @@ class _MyFirstAppState extends State<MyFirstApp> {
             padding: EdgeInsets.all(16),
             child: _loading
                 ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                LinearProgressIndicator(value: _progressValue),
-                Text(
-                  '${(_progressValue * 100).round()}%',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ],
-            )
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      LinearProgressIndicator(value: _progressValue),
+                      Text(
+                        '${(_progressValue * 100).round()}%',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ],
+                  )
                 : Text(
-              'Press button to download',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
+                    'Press button to download',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
