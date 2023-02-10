@@ -3,7 +3,105 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(AssetImageApp());
+  runApp(CounterApp());
+}
+
+class CounterApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return CounterAppState();
+  }
+}
+
+class CounterAppState extends State<CounterApp> {
+  double _count = 50;
+
+  @override
+  void incrementCount() {}
+
+  void decrementCount() {}
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.indigoAccent,
+        appBar: AppBar(
+          title: Text(
+            'Counter',
+          ),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Container(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Tap "-" to decrement',
+                        style: TextStyle(fontSize: 28, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(16.0),
+                    width: 195,
+                    decoration: new BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.all(12.0),
+                            textStyle: const TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {},
+                          child: const Text('-'),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 20, right: 20,),
+                          child:Text(
+                            '${_count.round()}',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.all(12.0),
+                            textStyle: const TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {},
+                          child: const Text('+'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Tap "+" to increment',
+                        style: TextStyle(fontSize: 28, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
 }
 
 class AssetImageApp extends StatelessWidget {
@@ -31,8 +129,7 @@ class AssetImageApp extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 30,
                       // fontFamily: 'IndieFlower',
-                      color: Colors.white
-                  ),
+                      color: Colors.white),
                 ),
               ),
             ],
