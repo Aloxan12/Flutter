@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'color_bloc.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -22,6 +24,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  ColorBloc _bloc = ColorBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +34,17 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       body: Center(
-        child: AnimatedContainer(
-          height: 100,
-          width: 100,
-          color: Colors.red,
-          duration: Duration(milliseconds: 500),
+        child: StreamBuilder(
+          stream: _bloc.outputStateStream,
+          initialData: Colors.red,
+          builder: (context, snapshot) {
+            return AnimatedContainer(
+              height: 100,
+              width: 100,
+              color: snapshot.data,
+              duration: Duration(milliseconds: 500),
+            );
+          },
         ),
       ),
       floatingActionButton: Row(

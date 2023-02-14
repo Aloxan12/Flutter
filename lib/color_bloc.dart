@@ -17,9 +17,19 @@ class ColorBloc{
   final _outputStateController = StreamController<Color>();
   Stream<Color> get outputStateStream => _outputStateController.stream;
 
-  void _mapEventToState(Color event){
+  void _mapEventToState(ColorEvent event){
     if(event == ColorEvent.evetn_red) _color = Colors.red;
     else if(event == ColorEvent.evetn_green) _color = Colors.green;
     else throw Exception('Wrong event types');
+
+    _outputStateController.sink.add(_color);
+  }
+
+  colorBloc(){
+    _inputEventController.stream.listen(_mapEventToState);
+  }
+  void dispose(){
+    _inputEventController.close();
+    _outputStateController.close();
   }
 }
