@@ -25,7 +25,7 @@ class ColorBloc{
     _outputStateController.sink.add(_color);
   }
 
-  colorBloc(){
+  ColorBloc(){
     _inputEventController.stream.listen(_mapEventToState);
   }
   void dispose(){

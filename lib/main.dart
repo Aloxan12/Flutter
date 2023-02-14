@@ -27,6 +27,12 @@ class _MyHomePageState extends State<MyHomePage> {
   ColorBloc _bloc = ColorBloc();
 
   @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -51,16 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
-            onPressed: null,
-            child: Text(''),
+            onPressed: (){
+              _bloc.inputEventSink.add(ColorEvent.evetn_red);
+            },
             backgroundColor: Colors.red,
           ),
-          SizedBox(
-            width: 10,
-          ),
+          SizedBox(width: 10),
           FloatingActionButton(
-            onPressed: null,
-            child: Text(''),
+            onPressed: (){
+              _bloc.inputEventSink.add(ColorEvent.evetn_green);
+            },
             backgroundColor: Colors.green,
           ),
         ],
