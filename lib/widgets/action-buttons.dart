@@ -12,6 +12,7 @@ class ActionButtons extends StatelessWidget {
           onPressed: () {},
           child: Text('Load'),
           style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
             backgroundColor: Colors.green,
           ),
         ),
@@ -20,6 +21,7 @@ class ActionButtons extends StatelessWidget {
           onPressed: () {},
           child: Text('clear'),
           style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
             backgroundColor: Colors.red,
           ),
         ),
