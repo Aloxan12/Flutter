@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'color_bloc.dart';
 
@@ -11,69 +12,112 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter',
-      home: MyHomePage(),
+    return BlocProvider(
+      create: (context) => ColorBlocWithBloC(),
+      child: MaterialApp(title: 'Flutter', home: MyHomePage()),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  ColorBloc _bloc = ColorBloc();
-
-  @override
-  void dispose() {
-    _bloc.dispose();
-    super.dispose();
-  }
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ColorBlocWithBloC _bloc = BlocProvider.of<ColorBlocWithBloC>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('BloC with Stream'),
+        title: const Text('Bloc with flutter bloc'),
         centerTitle: true,
       ),
       body: Center(
-        child: StreamBuilder(
-          stream: _bloc.outputStateStream,
-          initialData: Colors.red,
-          builder: (context, snapshot) {
-            return AnimatedContainer(
-              height: 100,
-              width: 100,
-              color: snapshot.data,
-              duration: Duration(milliseconds: 500),
-            );
-          },
+        child: BlocBuilder<ColorBlocWithBloC, Color>(
+          builder: (context, currentColor) => AnimatedContainer(
+            color: currentColor,
+            width: 100,
+            height: 100,
+            duration: const Duration(milliseconds: 500),
+          ),
         ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
-            onPressed: (){
-              _bloc.inputEventSink.add(ColorEvent.evetn_red);
-            },
             backgroundColor: Colors.red,
-          ),
-          SizedBox(width: 10),
-          FloatingActionButton(
-            onPressed: (){
-              _bloc.inputEventSink.add(ColorEvent.evetn_green);
+            onPressed: () {
+              _bloc.add(RedColorEvent());
             },
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          FloatingActionButton(
             backgroundColor: Colors.green,
+            onPressed: () {
+              _bloc.add(GreenColorEvent());
+            },
           ),
         ],
       ),
     );
   }
 }
+
+// class MyHomePage extends StatefulWidget {
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+//
+// class _MyHomePageState extends State<MyHomePage> {
+//   ColorBloc _bloc = ColorBloc();
+//
+//   @override
+//   void dispose() {
+//     _bloc.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('BloC with Stream'),
+//         centerTitle: true,
+//       ),
+//       body: Center(
+//         child: StreamBuilder(
+//           stream: _bloc.outputStateStream,
+//           initialData: Colors.red,
+//           builder: (context, snapshot) {
+//             return AnimatedContainer(
+//               height: 100,
+//               width: 100,
+//               color: snapshot.data,
+//               duration: Duration(milliseconds: 500),
+//             );
+//           },
+//         ),
+//       ),
+//       floatingActionButton: Row(
+//         mainAxisAlignment: MainAxisAlignment.end,
+//         children: <Widget>[
+//           FloatingActionButton(
+//             onPressed: (){
+//               _bloc.inputEventSink.add(ColorEvent.evetn_red);
+//             },
+//             backgroundColor: Colors.red,
+//           ),
+//           SizedBox(width: 10),
+//           FloatingActionButton(
+//             onPressed: (){
+//               _bloc.inputEventSink.add(ColorEvent.evetn_green);
+//             },
+//             backgroundColor: Colors.green,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // class CounterApp extends StatefulWidget {
 //   @override
