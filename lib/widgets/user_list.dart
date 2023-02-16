@@ -8,14 +8,21 @@ class UserList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocConsumer<UserBloc, UserState>(
+      listener: (context, state) {
+        if (state is UserLoadedState) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('User is loaded'),
+          ));
+        }
+      },
       builder: (context, state) {
         if (state is UserEmptyState) {
           return const Center(
-              child: Text(
-                'No data received. Please button "Load"',
-                style: TextStyle(fontSize: 20),
-              ),
+            child: Text(
+              'No data received. Please button "Load"',
+              style: TextStyle(fontSize: 20),
+            ),
           );
         }
         if (state is UserLoadingState) {

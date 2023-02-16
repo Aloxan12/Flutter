@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first_progect/bloc/user_bloc.dart';
 import 'package:flutter_first_progect/bloc/user_event.dart';
+import 'package:flutter_first_progect/cubit/internet_cubit.dart';
 import 'package:flutter_first_progect/services/user_repository.dart';
 
 import '../widgets/action-buttons.dart';
@@ -17,13 +18,23 @@ class HomePage extends StatelessWidget {
 
     return RepositoryProvider(
       create: (context) => UsersRepository(),
-      child: BlocProvider(
-        create: (context) =>
-            UserBloc(usersRepository: context.read<UsersRepository>())..add(UserLoadEvent()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                UserBloc(usersRepository: context.read<UsersRepository>())
+                  ..add(UserLoadEvent()),
+          ),
+          BlocProvider(create: (context) => ConnectionCubit())
+        ],
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: const Text('User list'),
+            title: BlocBuilder<ConnectionCubit, MyConnectionState>(
+              builder: (context, state) => state.connected
+                  ? Text('User List(в сети)')
+                  : Text('Нет соеденения с интернетом', style: TextStyle(color: Colors.red),),
+            ),
             centerTitle: true,
           ),
           body: Column(

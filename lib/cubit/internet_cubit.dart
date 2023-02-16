@@ -13,7 +13,7 @@ class MyConnectionState {
 }
 
 class ConnectionCubit extends Cubit<MyConnectionState>{
-  StreamSubscription<ConnectivityResult>? _subscription;
+  late StreamSubscription<ConnectivityResult>? _subscription;
   ConnectionCubit() : super(MyConnectionState(false)){
     _subscription = Connectivity().onConnectivityChanged.listen((result) {
       emit(MyConnectionState(result != ConnectivityResult.none));
