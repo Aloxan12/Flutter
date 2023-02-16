@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_progect/pages/home_page.dart';
-
-import 'color_bloc.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,10 +10,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ColorBlocWithBloC(),
-      child: MaterialApp(title: 'Flutter', home: HomePage()),
-    );
+    return MaterialApp(
+        title: 'Flutter',
+        home: Center(
+          child: Text('Rick and Morty'),
+        ));
   }
 }
-
