@@ -8,7 +8,8 @@ class ActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserBloc _userBloc = BlocProvider.of(context);
+    final UserBloc _userBloc = BlocProvider.of<UserBloc>(context, listen: false);
+    // final UserBloc _userBloc = context.read<UserBloc>();
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
