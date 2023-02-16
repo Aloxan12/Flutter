@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyConnectionState {
