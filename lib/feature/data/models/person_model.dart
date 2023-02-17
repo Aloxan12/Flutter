@@ -1,8 +1,8 @@
-import 'package:flutter_first_progect/feature/data/models/location_modal.dart';
+import 'package:flutter_first_progect/feature/data/models/location_model.dart';
 import 'package:flutter_first_progect/feature/domain/entities/person_entity.dart';
 
-class PersonModal extends PersonEntity{
-  PersonModal({
+class PersonModel extends PersonEntity{
+  PersonModel({
     required id,
     required name,
     required status,
@@ -28,16 +28,16 @@ class PersonModal extends PersonEntity{
        created: created,
   );
 
-  factory PersonModal.fromJson(Map<String, dynamic>json){
-    return PersonModal(
+  factory PersonModel.fromJson(Map<String, dynamic>json){
+    return PersonModel(
       id:json['id'],
       name:json['name'],
       status: json['status'],
       species: json['species'],
       type: json['type'],
       gender: json['gender'],
-      origin: json['origin'] != null ? LocationModal.fromJson(json['origin']) : null,
-      location: json['location'] != null ? LocationModal.fromJson(json['location']) : null,
+      origin: json['origin'] != null ? LocationModel.fromJson(json['origin']) : null,
+      location: json['location'] != null ? LocationModel.fromJson(json['location']) : null,
       image: json['image'],
       episode: (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
       created: DateTime.parse(json['created'] as String),

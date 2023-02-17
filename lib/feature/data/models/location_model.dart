@@ -1,14 +1,14 @@
 import 'package:flutter_first_progect/feature/domain/entities/person_entity.dart';
 
-class LocationModal extends LocationEntity {
-  LocationModal({name, url})
+class LocationModel extends LocationEntity {
+  LocationModel({name, url})
       : super(
           name: name,
           url: url,
         );
 
-  factory LocationModal.fromJson(Map<String, dynamic> json) {
-    return LocationModal(
+  factory LocationModel.fromJson(Map<String, dynamic> json) {
+    return LocationModel(
       name: json['name'],
       url: json['url'],
     );
