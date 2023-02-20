@@ -452,6 +452,38 @@ abstract class CharacterStateError implements CharacterState {
 mixin _$CharacterEvent {
   String get name => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String name, int page) fetch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String name, int page)? fetch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String name, int page)? fetch,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CharacterEventFetch value) fetch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CharacterEventFetch value)? fetch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CharacterEventFetch value)? fetch,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CharacterEventCopyWith<CharacterEvent> get copyWith =>
@@ -546,7 +578,7 @@ class _$CharacterEventFetch implements CharacterEventFetch {
 
   @override
   String toString() {
-    return 'CharacterEvent(name: $name, page: $page)';
+    return 'CharacterEvent.fetch(name: $name, page: $page)';
   }
 
   @override
@@ -567,6 +599,62 @@ class _$CharacterEventFetch implements CharacterEventFetch {
   _$$CharacterEventFetchCopyWith<_$CharacterEventFetch> get copyWith =>
       __$$CharacterEventFetchCopyWithImpl<_$CharacterEventFetch>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String name, int page) fetch,
+  }) {
+    return fetch(name, page);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String name, int page)? fetch,
+  }) {
+    return fetch?.call(name, page);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String name, int page)? fetch,
+    required TResult orElse(),
+  }) {
+    if (fetch != null) {
+      return fetch(name, page);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CharacterEventFetch value) fetch,
+  }) {
+    return fetch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CharacterEventFetch value)? fetch,
+  }) {
+    return fetch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CharacterEventFetch value)? fetch,
+    required TResult orElse(),
+  }) {
+    if (fetch != null) {
+      return fetch(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class CharacterEventFetch implements CharacterEvent {
