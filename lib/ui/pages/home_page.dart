@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget{
       ),
       body: BlocProvider(
         create: ((context) => CharacterBloc(characterRepo: repository)),
-        child: const SearchPage(),
+        child: SearchPage(),
       ),
     );
   }
