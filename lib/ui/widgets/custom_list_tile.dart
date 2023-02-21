@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_first_progect/data/models/character.dart';
+import 'package:flutter_first_progect/ui/widgets/character_status.dart';
 
 class CustomListTile extends StatelessWidget {
   final Results character;
@@ -41,6 +42,13 @@ class CustomListTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
+                  CharacterStatus(
+                      liveState: character.status == 'Alive'
+                          ? LiveStatus.alive
+                          : character.status == 'Dead'
+                              ? LiveStatus.dead
+                              : LiveStatus.unknown),
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2,
                     child: Row(
