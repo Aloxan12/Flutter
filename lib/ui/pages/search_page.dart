@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first_progect/bloc/character_bloc.dart';
 import 'package:flutter_first_progect/data/models/character.dart';
+import 'package:flutter_first_progect/ui/widgets/custom_list_tile.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -85,12 +86,28 @@ class _SearchPageState extends State<SearchPage> {
                 _currentResults = characterLoaded.results;
 
                 return _currentResults.isNotEmpty
-                    ? Text('$_currentResults')
+                    ? _customListView(_currentResults)
                     : const SizedBox();
               },
               error: () => const Text('Nothing found...')),
         ),
       ],
+    );
+  }
+
+  Widget _customListView(List<Results> currentResults) {
+    return Padding(
+      padding: EdgeInsets.only(right: 16, left: 16, top: 3, bottom: 3),
+      child: ListView.separated(
+        separatorBuilder: (_, index) => const SizedBox(
+          height: 5,
+        ),
+        itemCount: currentResults.length,
+        itemBuilder: (context, index) {
+          final character = currentResults[index];
+          return CustomListTile(character: character);
+        },
+      ),
     );
   }
 }
