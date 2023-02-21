@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,8 @@ class _SearchPageState extends State<SearchPage> {
 
   final RefreshController refreshController = RefreshController();
   bool _isPagination = false;
+
+  Timer? searchDebounce;
 
   final _storage = HydratedBlocOverrides.current?.storage;
 
@@ -69,9 +73,12 @@ class _SearchPageState extends State<SearchPage> {
               _currentResults = [];
               _currentSearchStr = value;
 
-              context
-                  .read<CharacterBloc>()
-                  .add(CharacterEvent.fetch(name: value, page: _currentPage));
+              searchDebounce?.cancel();
+              searchDebounce = Timer(const Duration(milliseconds: 500), () {
+                context
+                    .read<CharacterBloc>()
+                    .add(CharacterEvent.fetch(name: value, page: _currentPage));
+              });
             },
           ),
         ),
@@ -96,7 +103,8 @@ class _SearchPageState extends State<SearchPage> {
               loaded: (characterLoaded) {
                 _currentCharacter = characterLoaded;
                 if (_isPagination) {
-                  _currentResults = List.from(_currentResults)..addAll(_currentCharacter.results);
+                  _currentResults = List.from(_currentResults)
+                    ..addAll(_currentCharacter.results);
                   refreshController.loadComplete();
                   _isPagination = false;
                 } else {
@@ -136,7 +144,8 @@ class _SearchPageState extends State<SearchPage> {
         itemBuilder: (context, index) {
           final character = currentResults[index];
           return Padding(
-            padding: const EdgeInsets.only(right: 16, left: 16, top: 3, bottom: 3),
+            padding:
+                const EdgeInsets.only(right: 16, left: 16, top: 3, bottom: 3),
             child: CustomListTile(character: character),
           );
         },
