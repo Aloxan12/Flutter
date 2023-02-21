@@ -2,10 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first_progect/bloc_observable.dart';
 import 'package:flutter_first_progect/ui/pages/home_page.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final storage = await HydratedStorage.build(
+    storageDirectory: await getTemporaryDirectory(),
+  );
+
   Bloc.observer = CharacterBlocObservable();
-  runApp(MyApp());
+  HydratedBlocOverrides.runZoned(
+        () => runApp(const MyApp()),
+    blocObserver: CharacterBlocObservable(),
+    storage: storage,
+  );
 }
 
 class MyApp extends StatelessWidget {

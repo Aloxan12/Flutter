@@ -5,6 +5,7 @@ import 'package:flutter_first_progect/bloc/character_bloc.dart';
 import 'package:flutter_first_progect/data/models/character.dart';
 import 'package:flutter_first_progect/ui/widgets/custom_list_tile.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -22,16 +23,17 @@ class _SearchPageState extends State<SearchPage> {
   final RefreshController refreshController = RefreshController();
   bool _isPagination = false;
 
+  final _storage = HydratedBlocOverrides.current?.storage;
+
   @override
   void initState() {
-    if (_currentResults.isEmpty) {
-      context
-          .read<CharacterBloc>()
-          .add(const CharacterEvent.fetch(name: '', page: 1));
+    if (_storage.runtimeType.toString().isEmpty) {
+      if (_currentResults.isEmpty) {
+        context
+            .read<CharacterBloc>()
+            .add(const CharacterEvent.fetch(name: '', page: 1));
+      }
     }
-    context
-        .read<CharacterBloc>()
-        .add(const CharacterEventFetch(name: '', page: 1));
     super.initState();
   }
 
