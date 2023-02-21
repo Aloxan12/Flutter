@@ -1,13 +1,19 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_first_progect/bloc/character_bloc.dart';
 import 'package:flutter_first_progect/data/models/character.dart';
 import 'package:flutter_first_progect/ui/widgets/custom_list_tile.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
+
   @override
-  _SearchPageState createState() => _SearchPageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
@@ -15,6 +21,9 @@ class _SearchPageState extends State<SearchPage> {
   List<Results> _currentResults = [];
   int _currentPage = 1;
   String _currentSearchStr = '';
+
+  final RefreshController refreshController = RefreshController();
+  bool _isPagination = false;
 
   @override
   void initState() {
@@ -70,20 +79,30 @@ class _SearchPageState extends State<SearchPage> {
         Expanded(
           child: state.when(
               loading: () {
-                return Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      CircularProgressIndicator(strokeWidth: 2),
-                      SizedBox(width: 10),
-                      Text('Loading...'),
-                    ],
-                  ),
-                );
+                if (!_isPagination) {
+                  return Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const <Widget>[
+                        CircularProgressIndicator(strokeWidth: 2),
+                        SizedBox(width: 10),
+                        Text('Loading...'),
+                      ],
+                    ),
+                  );
+                } else {
+                  return _customListView(_currentResults);
+                }
               },
               loaded: (characterLoaded) {
                 _currentCharacter = characterLoaded;
-                _currentResults = characterLoaded.results;
+                if (_isPagination) {
+                  _currentResults = List.from(_currentResults)..addAll(_currentCharacter.results);
+                  refreshController.loadComplete();
+                  _isPagination = false;
+                } else {
+                  _currentResults = characterLoaded.results;
+                }
 
                 return _currentResults.isNotEmpty
                     ? _customListView(_currentResults)
@@ -96,8 +115,20 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget _customListView(List<Results> currentResults) {
-    return Padding(
-      padding: EdgeInsets.only(right: 16, left: 16, top: 3, bottom: 3),
+    return SmartRefresher(
+      controller: refreshController,
+      enablePullUp: true,
+      enablePullDown: false,
+      onLoading: () {
+        _isPagination = true;
+        _currentPage++;
+        if (_currentPage <= _currentCharacter.info.pages) {
+          context.read<CharacterBloc>().add(CharacterEvent.fetch(
+              name: _currentSearchStr, page: _currentPage));
+        } else {
+          refreshController.loadNoData();
+        }
+      },
       child: ListView.separated(
         separatorBuilder: (_, index) => const SizedBox(
           height: 5,
@@ -105,7 +136,10 @@ class _SearchPageState extends State<SearchPage> {
         itemCount: currentResults.length,
         itemBuilder: (context, index) {
           final character = currentResults[index];
-          return CustomListTile(character: character);
+          return Padding(
+            padding: const EdgeInsets.only(right: 16, left: 16, top: 3, bottom: 3),
+            child: CustomListTile(character: character),
+          );
         },
       ),
     );
