@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_first_progect/bloc_observable.dart';
 import 'package:flutter_first_progect/ui/pages/home_page.dart';
 
 void main() {
+  Bloc.observer = CharacterBlocObservable();
   runApp(MyApp());
 }
 
