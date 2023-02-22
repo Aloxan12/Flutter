@@ -32,6 +32,17 @@ class Results with _$Results {
     required String species,
     required String gender,
     required String image,
+    required Location location,
+    required List<String> episode,
 }) = _Results;
   factory Results.fromJson(Map<String, dynamic> json)=> _$ResultsFromJson(json);
+}
+
+@freezed
+class Location with _$Location {
+  const factory Location({
+    required String name,
+    required String url,
+  }) = _Location;
+  factory Location.fromJson(Map<String, dynamic> json)=> _$LocationFromJson(json);
 }

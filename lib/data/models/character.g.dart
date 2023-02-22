@@ -40,6 +40,9 @@ _$_Results _$$_ResultsFromJson(Map<String, dynamic> json) => _$_Results(
       species: json['species'] as String,
       gender: json['gender'] as String,
       image: json['image'] as String,
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      episode:
+          (json['episode'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$_ResultsToJson(_$_Results instance) =>
@@ -50,4 +53,17 @@ Map<String, dynamic> _$$_ResultsToJson(_$_Results instance) =>
       'species': instance.species,
       'gender': instance.gender,
       'image': instance.image,
+      'location': instance.location,
+      'episode': instance.episode,
+    };
+
+_$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
+      name: json['name'] as String,
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'url': instance.url,
     };

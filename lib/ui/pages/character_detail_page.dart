@@ -49,22 +49,32 @@ class CharacterDetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Gender:',
-                style: Theme.of(context).textTheme.caption,
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                character.gender,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyText1,
-              )
+              ...buildText('Gender:', character.gender),
+              ...buildText('Count of episode', character.episode.length.toString()),
             ],
           ),
         ]),
       ),
     );
+  }
+
+  List<Widget> buildText(String text, String value){
+    return [
+      Text(
+        text,
+        style: const TextStyle(color: Colors.black, fontSize: 18),
+      ),
+      const SizedBox(
+        height: 2,
+      ),
+      Text(
+        value,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(color: Colors.white, fontSize: 20),
+      ),
+      const SizedBox(
+        height: 2,
+      ),
+    ];
   }
 }
