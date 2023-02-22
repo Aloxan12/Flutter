@@ -34,6 +34,5 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> with HydratedMi
 
   @override
   Map<String, dynamic>? toJson(CharacterState state)=> state.toJson();
-  
-  
+
 }
