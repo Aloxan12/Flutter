@@ -178,28 +178,39 @@ Widget _sevenDaysForecast() {
                 itemExtent: 140,
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(241, 238, 238, 0.4823529411764706)
-                    ),
-                    child: Column(
-                      children: [
-                        Text('Friday', style: TextStyle(fontSize: 24, color: Colors.white),),
-                        Row(
-                          children: <Widget>[
-
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  ListTile(
-                    title: Text('14 °F'),
-                  ),
+                  _dayForecast('Friday', '6'),
+                  _dayForecast('Saturday', '5'),
+                  _dayForecast('Sunday', '9'),
+                  _dayForecast('Monday', '12'),
                 ],
               ),
             )
           ],
         ),
       ));
+}
+
+Widget _dayForecast(String dayName, String temperature,){
+  return Container(
+    padding: const EdgeInsets.all(7),
+    margin: const EdgeInsets.only(right: 8),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        color: const Color.fromRGBO(241, 238, 238, 0.4823529411764706)
+    ),
+    child: Column(
+      children: [
+        Text(dayName, style: const TextStyle(fontSize: 24, color: Colors.white),),
+        const SizedBox(height: 10,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('$temperature F', style: const TextStyle(fontSize: 20,color: Colors.white),),
+            const SizedBox(width: 15,),
+            const Icon(Icons.sunny, color: Colors.white,),
+          ],
+        )
+      ],
+    ),
+  );
 }
