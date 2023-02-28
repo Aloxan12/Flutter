@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_progect/bloc/character_bloc.dart';
-import 'package:flutter_first_progect/data/repositories/character_repo.dart';
-import 'package:flutter_first_progect/ui/pages/search_page.dart';
+import 'package:flutter_first_progect/RickAndMorty/bloc/character_bloc.dart';
+import 'package:flutter_first_progect/RickAndMorty/data/repositories/character_repo.dart';
+import 'package:flutter_first_progect/RickAndMorty/ui/pages/search_page.dart';
 
 class HomePage extends StatelessWidget{
   HomePage({Key? key, required this.title }) : super(key: key);

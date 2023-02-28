@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_progect/bloc/character_bloc.dart';
-import 'package:flutter_first_progect/data/models/character.dart';
-import 'package:flutter_first_progect/ui/widgets/custom_list_tile.dart';
+import 'package:flutter_first_progect/RickAndMorty/bloc/character_bloc.dart';
+import 'package:flutter_first_progect/RickAndMorty/data/models/character.dart';
+import 'package:flutter_first_progect/RickAndMorty/ui/widgets/custom_list_tile.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 

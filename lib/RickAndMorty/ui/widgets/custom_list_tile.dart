@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_first_progect/data/models/character.dart';
-import 'package:flutter_first_progect/ui/pages/character_detail_page.dart';
-import 'package:flutter_first_progect/ui/widgets/character_status.dart';
+import 'package:flutter_first_progect/RickAndMorty/data/models/character.dart';
+import 'package:flutter_first_progect/RickAndMorty/ui/pages/character_detail_page.dart';
+import 'package:flutter_first_progect/RickAndMorty/ui/widgets/character_status.dart';
 
 class CustomListTile extends StatelessWidget {
   final Results character;

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_first_progect/data/models/character.dart';
+import 'package:flutter_first_progect/RickAndMorty/data/models/character.dart';
 import 'package:http/http.dart' as http;
 
 class CharacterRepo{

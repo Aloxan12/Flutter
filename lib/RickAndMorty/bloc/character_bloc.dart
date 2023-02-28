@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_progect/data/models/character.dart';
-import 'package:flutter_first_progect/data/repositories/character_repo.dart';
+import 'package:flutter_first_progect/RickAndMorty/data/models/character.dart';
+import 'package:flutter_first_progect/RickAndMorty/data/repositories/character_repo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
