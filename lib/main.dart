@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_first_progect/RickAndMorty/ui/pages/home_page.dart';
+import 'package:flutter_first_progect/Weather/home_page.dart';
 import 'package:flutter_first_progect/bloc_observable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -50,6 +50,6 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey),
           ),
         ),
-        home: HomePage(title: 'Rick and Morty'));
+        home: WeatherHomePage(title: 'Weather App'));
   }
 }
