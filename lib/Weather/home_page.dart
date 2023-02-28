@@ -160,7 +160,7 @@ Widget _extraDayDetail(String temperature, String value) {
 
 Widget _sevenDaysForecast() {
   return Container(
-      padding: EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.only(top: 40),
       width: 300,
       height: 300,
       child: RepaintBoundary(
@@ -170,7 +170,7 @@ Widget _sevenDaysForecast() {
               '7-day weather Forecast',
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             SizedBox(
               width: 300,
               height: 84,
