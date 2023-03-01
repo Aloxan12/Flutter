@@ -51,6 +51,11 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey),
           ),
         ),
-        home: NavigateHomePage(title: 'Navigator apps'));
+        home: NavigateHomePage(title: 'Navigator apps'),
+        routes: {
+          '/page2': (context)=> SecondScreenPage(),
+          '/page3': (context)=> ThirdScreenPage(),
+        },
+    );
   }
 }
