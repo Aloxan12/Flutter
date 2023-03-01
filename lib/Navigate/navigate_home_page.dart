@@ -17,7 +17,8 @@ class NavigateHomePage extends StatelessWidget {
       body: Center(
         child: TextButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: ((context) => const SecondScreenPage())));
+            User user = User(name: 'Alex', age: 28);
+            Navigator.push(context, MaterialPageRoute(builder: ((context) => SecondScreenPage(user: user,))));
           },
           child: const Text('Go to second screen'),
         ),
