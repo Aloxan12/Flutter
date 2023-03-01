@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_first_progect/Navigate/navigate_home_page.dart';
 import 'package:flutter_first_progect/Weather/home_page.dart';
 import 'package:flutter_first_progect/bloc_observable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -50,6 +51,6 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey),
           ),
         ),
-        home: WeatherHomePage(title: 'Weather App'));
+        home: NavigateHomePage(title: 'Navigator apps'));
   }
 }
