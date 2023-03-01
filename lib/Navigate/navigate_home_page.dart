@@ -29,13 +29,13 @@ class NavigateHomePage extends StatelessWidget {
 
 
 class SecondScreenPage extends StatelessWidget{
-  final User? user;
-  const SecondScreenPage({Key? key, this.user}): super(key: key);
+  final User user;
+  const SecondScreenPage({Key? key, required this.user}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Second page ${user?.name} ${user?.age}'),),
+      appBar: AppBar(title: Text('Second page ${user.name} ${user.age}'),),
       body: Center(
         child: TextButton(
           onPressed: (){
@@ -49,8 +49,8 @@ class SecondScreenPage extends StatelessWidget{
 }
 
 class User {
-  final String? name;
-  final int? age;
+  final String name;
+  final int age;
 
-  User({this.name, this.age});
+  User({required this.name, required this.age});
 }
