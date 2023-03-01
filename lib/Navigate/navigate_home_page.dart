@@ -27,7 +27,8 @@ class NavigateHomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: (){
-                Navigator.pushNamed(context, '/page3');
+                User user = User(name: 'Jon', age: 27);
+                Navigator.pushNamed(context, '/page3', arguments: user);
               },
               child: const Text('Go to third screen'),
             ),
@@ -60,12 +61,15 @@ class SecondScreenPage extends StatelessWidget{
 }
 
 class ThirdScreenPage extends StatelessWidget{
-  const ThirdScreenPage({super.key});
+  User? user;
+  // const ThirdScreenPage({Key? key, this.user}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    RouteSettings? setting = ModalRoute.of(context)?.settings;
+    user = setting?.arguments as User;
     return Scaffold(
-      appBar: AppBar(title: const Text('third screen'),),
+      appBar: AppBar(title: Text('third screen ${user?.name}'),),
       body: Center(
         child: TextButton(
           onPressed: (){
