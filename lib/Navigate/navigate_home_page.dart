@@ -62,7 +62,8 @@ class SecondScreenPage extends StatelessWidget{
 
 class ThirdScreenPage extends StatelessWidget{
   User? user;
-  // const ThirdScreenPage({Key? key, this.user}):super(key: key);
+
+  ThirdScreenPage({super.key});
 
   @override
   Widget build(BuildContext context) {
