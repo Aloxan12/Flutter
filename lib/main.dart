@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_first_progect/Navigate/fifth_page.dart';
+import 'package:flutter_first_progect/Navigate/fourth_page.dart';
 import 'package:flutter_first_progect/Navigate/navigate_home_page.dart';
+import 'package:flutter_first_progect/Navigate/second_page.dart';
+import 'package:flutter_first_progect/Navigate/third_page.dart';
 import 'package:flutter_first_progect/Weather/home_page.dart';
 import 'package:flutter_first_progect/bloc_observable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -51,12 +55,12 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey),
           ),
         ),
-        home: NavigateHomePage(title: 'Navigator apps'),
+        home: const NavigateHomePage(title: 'Navigator apps'),
         routes: {
-          '/page2': (context)=> SecondScreenPage(),
+          '/page2': (context)=> const SecondScreenPage(),
           '/page3': (context)=> ThirdScreenPage(),
-          '/page4': (context)=> FourthScreenPage(),
-          '/page5': (context)=> FifthScreenPage(),
+          '/page4': (context)=> const FourthScreenPage(),
+          '/page5': (context)=> const FifthScreenPage(),
         },
     );
   }
