@@ -55,6 +55,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/page2': (context)=> SecondScreenPage(),
           '/page3': (context)=> ThirdScreenPage(),
+          '/page4': (context)=> FourthScreenPage(),
+          '/page5': (context)=> FifthScreenPage(),
         },
     );
   }
