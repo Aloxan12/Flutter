@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_first_progect/FormPage/form_page.dart';
 import 'package:flutter_first_progect/Navigate/fifth_page.dart';
 import 'package:flutter_first_progect/Navigate/fourth_page.dart';
 import 'package:flutter_first_progect/Navigate/navigate_home_page.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
                 color: Colors.grey),
           ),
         ),
-        home: const NavigateHomePage(title: 'Navigator apps'),
+        home: const FormPage(),
         routes: {
           '/page2': (context)=> const SecondScreenPage(),
           '/page3': (context)=> ThirdScreenPage(),
