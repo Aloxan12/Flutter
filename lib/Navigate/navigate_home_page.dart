@@ -37,6 +37,12 @@ class NavigateHomePage extends StatelessWidget {
             },
             child: const Text('Go to third screen'),
           ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/page4');
+            },
+            child: const Text('Go to fourth screen'),
+          ),
         ],
       )),
     );
