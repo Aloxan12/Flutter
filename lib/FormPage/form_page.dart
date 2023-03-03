@@ -67,15 +67,31 @@ class _FormPage extends State<FormPage> {
             ),
             SizedBox(height: 10),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Life story', hintText: 'Tell us about yourself'),
+              decoration: InputDecoration(
+                labelText: 'Life story',
+                hintText: 'Tell us about yourself',
+                helperText: 'Keep it short, this is just a demo',
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 3,
             ),
             SizedBox(height: 10),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Password *'),
+              decoration: InputDecoration(
+                labelText: 'Password *',
+                hintText: 'Enter the password',
+                suffixIcon: Icon(Icons.visibility),
+                icon: Icon(Icons.security),
+              ),
             ),
             SizedBox(height: 10),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Confirm password *'),
+              decoration: InputDecoration(
+                labelText: 'Confirm password *',
+                hintText: 'Enter the confirm password',
+                suffixIcon: Icon(Icons.visibility),
+                icon: Icon(Icons.border_color),
+              ),
             ),
             SizedBox(height: 10),
             TextButton(
