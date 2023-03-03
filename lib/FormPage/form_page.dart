@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_first_progect/FormPage/form_info_page.dart';
+import 'package:flutter_first_progect/FormPage/model/user.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);
@@ -24,6 +26,8 @@ class _FormPage extends State<FormPage> {
 
   List<String> _countries = ['Ukraine', 'Belarus', 'Germany', 'France'];
   String? _selectedCountry;
+
+  User newUser = User();
 
   @override
   void dispose() {
@@ -49,21 +53,27 @@ class _FormPage extends State<FormPage> {
             TextFormField(
               controller: _nameController,
               validator: _validateName,
-              decoration: const InputDecoration(
+              onSaved: (value) => newUser.name = value,
+              decoration: InputDecoration(
                 labelText: 'Full Name*',
                 hintText: 'What do people call you?',
-                prefixIcon: Icon(Icons.person),
-                suffixIcon: Icon(
-                  Icons.delete_outline,
-                  color: Colors.red,
+                prefixIcon: const Icon(Icons.person),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    _nameController.clear();
+                  },
+                  child: const Icon(
+                    Icons.delete_outline,
+                    color: Colors.red,
+                  ),
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     borderSide: BorderSide(color: Colors.black, width: 2)),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     borderSide: BorderSide(color: Colors.blue, width: 2)),
-                errorBorder: OutlineInputBorder(
+                errorBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     borderSide: BorderSide(color: Colors.red, width: 2)),
               ),
@@ -78,22 +88,28 @@ class _FormPage extends State<FormPage> {
               validator: (value) => _validatePhone(value!)
                   ? null
                   : 'Phone number must be as (xxx)xxx-xxxx',
-              decoration: const InputDecoration(
+              onSaved: (value) => newUser.phone = value,
+              decoration: InputDecoration(
                 labelText: 'Phone number *',
                 hintText: 'what is your number',
                 helperText: 'Phone format (xxx)xxx-xxxx',
-                prefixIcon: Icon(Icons.phone),
-                suffixIcon: Icon(
-                  Icons.delete_outline,
-                  color: Colors.red,
+                prefixIcon: const Icon(Icons.phone),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    _phoneController.clear();
+                  },
+                  child: const Icon(
+                    Icons.delete_outline,
+                    color: Colors.red,
+                  ),
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     borderSide: BorderSide(color: Colors.black, width: 2)),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     borderSide: BorderSide(color: Colors.blue, width: 2)),
-                errorBorder: OutlineInputBorder(
+                errorBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     borderSide: BorderSide(color: Colors.red, width: 2)),
               ),
@@ -101,36 +117,39 @@ class _FormPage extends State<FormPage> {
             const SizedBox(height: 10),
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: 'Email address',
                   hintText: 'Enter a email address',
                   icon: Icon(Icons.email)),
               validator: _validateEmail,
+              onSaved: (value) => newUser.email = value,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             DropdownButtonFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   icon: Icon(Icons.map),
                   labelText: 'Country?'),
               items: _countries.map((country) {
                 return DropdownMenuItem(
-                  child: Text(country),
                   value: country,
+                  child: Text(country),
                 );
               }).toList(),
-              onChanged: (data) {
+              onChanged: (country) {
                 setState(() {
-                  _selectedCountry = data;
+                  newUser.country = country;
+                  _selectedCountry = country;
                 });
               },
               validator: (val) => val == null ? 'Please select country' : null,
               value: _selectedCountry,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextFormField(
               controller: _storyController,
-              decoration: InputDecoration(
+              onSaved: (value) => newUser.story = value,
+              decoration: const InputDecoration(
                 labelText: 'Life story',
                 hintText: 'Tell us about yourself',
                 helperText: 'Keep it short, this is just a demo',
@@ -149,7 +168,7 @@ class _FormPage extends State<FormPage> {
                 suffixIcon: Icon(
                   this._hidePass ? Icons.visibility_off : Icons.visibility,
                 ),
-                icon: Icon(Icons.security),
+                icon: const Icon(Icons.security),
               ),
             ),
             const SizedBox(height: 10),
@@ -219,6 +238,7 @@ class _FormPage extends State<FormPage> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState?.save();
+      _showDialog(name: _nameController.text);
       print('name ${_nameController.text}');
       print('phone ${_phoneController.text}');
       print('email ${_emailController.text}');
@@ -253,12 +273,30 @@ class _FormPage extends State<FormPage> {
           return AlertDialog(
             title: const Text(
               'Registration successful',
-              style: const TextStyle(color: Colors.green ,fontWeight: FontWeight.w700, fontSize: 18),
+              style: const TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18),
             ),
             content: Text(
               '$name is now a verified registration',
               style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
             ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) =>
+                                FormInfoPage(userInfo: newUser))));
+                  },
+                  child: Text(
+                    'Verified',
+                    style: TextStyle(color: Colors.green, fontSize: 18),
+                  ))
+            ],
           );
         }));
   }
