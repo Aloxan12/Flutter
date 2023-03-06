@@ -121,7 +121,7 @@ class _FormPage extends State<FormPage> {
                   labelText: 'Email address',
                   hintText: 'Enter a email address',
                   icon: Icon(Icons.email)),
-              validator: _validateEmail,
+              // validator: _validateEmail,
               onSaved: (value) => newUser.email = value,
             ),
             const SizedBox(height: 10),
@@ -215,15 +215,15 @@ class _FormPage extends State<FormPage> {
     return _phoneExp.hasMatch(input);
   }
 
-  String? _validateEmail(String? value) {
-    if (value!.isEmpty) {
-      return 'Email cannot be empty';
-    } else if (!_emailController.text.contains('@')) {
-      return 'Invalid email';
-    } else {
-      return null;
-    }
-  }
+  // String? _validateEmail(String? value) {
+  //   if (value!.isEmpty) {
+  //     return 'Email cannot be empty';
+  //   } else if (!_emailController.text.contains('@')) {
+  //     return 'Invalid email';
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   String? _validatePassword(String? value) {
     if (_passwordController.text.length != 8) {

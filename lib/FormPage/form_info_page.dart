@@ -5,9 +5,10 @@ import 'package:flutter_first_progect/FormPage/model/user.dart';
 class FormInfoPage extends StatelessWidget {
 
   User? userInfo;
-  FormInfoPage({userInfo});
+  FormInfoPage({this.userInfo});
   @override
   Widget build(BuildContext context) {
+    final isNotValidEmail = userInfo?.email?.isEmpty;
     return Scaffold(
       appBar: AppBar(
         title: Text('User Info'),
@@ -19,19 +20,19 @@ class FormInfoPage extends StatelessWidget {
           children: <Widget>[
             ListTile(
               title: Text(
-                'Name',
+                '${userInfo?.name}',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              subtitle: Text('Story'),
+              subtitle: Text('${userInfo?.story}', style: TextStyle(color: Colors.black),),
               leading: Icon(
                 Icons.person,
                 color: Colors.black,
               ),
-              trailing: Text('country'),
+              trailing: Text('${userInfo?.country}'),
             ),
             ListTile(
               title: Text(
-                'Phone',
+                '${userInfo?.phone}',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               leading: Icon(
@@ -39,13 +40,13 @@ class FormInfoPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            ListTile(
+             ListTile(
               title: Text(
-                'Email',
+                '${userInfo?.email}',
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
               leading: Icon(
-                Icons.email,
+                isNotValidEmail! ? null : Icons.email,
                 color: Colors.black,
               ),
             )
